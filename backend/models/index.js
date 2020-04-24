@@ -5,26 +5,29 @@ const bodyParser=require('body-parser');
 const path = require('path');
 
 //define objects
-const User = sequelize.import('./user.js');
-const Transaction = sequelize.import('./Transaction.js');
-const Currency = sequelize.import('./Currency.js')
-const ContBeneficiar=sequelize.import('./ContBeneficiar.js')
+const Client = sequelize.import('./Client.js');
+const Tranzactie = sequelize.import('./Tranzactie.js');
+const Moneda = sequelize.import('./Moneda.js')
 const Beneficiar = sequelize.import('Beneficiar.js')
-const Account =sequelize.import('./Account.js')
+const Cont =sequelize.import('./Cont.js')
+const TranzactieCursDeSchimb = sequelize.import('./TransactieCursDeSchimb.js')
 
 //the relationships
-User.hasMany(Account,{onDelete:'cascade'},{foreignKey: 'UserId'})
-User.hasMany(Account, { onDelete: 'cascade' });
-Account.hasMany(Transaction,{onDelete:'cascade'})
-Account.hasOne(Currency,{onDelete:'cascade'})
+Client.hasMany(Cont,{onDelete:'cascade'},{foreignKey: 'ClientId'})
+Cont.hasMany(Tranzactie,{onDelete:'cascade'},{foreignKey:'ContId'})
+Cont.hasOne(Moneda,{onDelete:'cascade'},{foreignKey:'MonedaId'})
+Cont.hasMany(TranzactieCursDeSchimb,{onDelete:'cascade'},{foreignKey:'ContId'})
+Cont.hasMany(Beneficiar,{onDelete:'cascade'},{foreignKey:'ContId'})
 
 
 module.exports = {
     sequelize,
-    User,
-    Transaction,
-    Currency,
-    Account
+    Client,
+    Tranzactie,
+    Moneda,
+    Cont,
+    TranzactieCursDeSchimb,
+    Beneficiar
 }
 
 

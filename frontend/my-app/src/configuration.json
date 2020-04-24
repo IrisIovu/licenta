@@ -1,0 +1,5 @@
+{
+    
+    "backendUrl": "http://localhost:3000",
+    "token_secret": "dskfbwugibd2d"
+}

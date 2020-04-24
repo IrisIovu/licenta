@@ -1,20 +1,22 @@
 const router = require("express").Router();
-const userController = require('../controllers/user');
-const userAccount = require('../controllers/Account');
-const Transaction = require('../controllers/Transaction');
+const userController = require('../controllers/Client');
+const Cont = require('../controllers/Cont');
+const Transaction = require('../controllers/Tranzactie');
 
-router.post('/register', userController.registerUser);
+router.post('/register', userController.registerClient);
 router.post('/login', userController.login);
 router.put('/resetpassword', userController.resetPassword);
 
 
-router.post('/createAccount', userAccount.createAccount);
-router.put('/changeAccountBalance',userAccount.changeAccountBalance);
-router.delete('/deleteAccount',userAccount.deleteAccount);
-router.get('/getAccountForTransaction',userAccount.GetAccountForTransaction);
+router.post('/createCont', Cont.createCont);
+router.put('/updateSold',Cont.updateSold);
+router.delete('/deleteCont',Cont.deleteCont);
+router.get('/GetContForTransaction',Cont.GetContForTransaction);
 
+/*
 router.post("/createTransaction",Transaction.createTransaction);
 router.delete("/destroyTransaction",Transaction.destroyTransaction);
 router.get("/getAllTransactionForOneAccount",Transaction.getAllTransactionForOneAccountByAccoundID)
+*/
 
 module.exports =router

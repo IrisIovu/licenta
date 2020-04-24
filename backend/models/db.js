@@ -6,6 +6,7 @@ let sequelize = new Sequelize('banca', 'iovuiris', 'iovuiris', {
       timestamps: false
    }
 });
+
 /*
 sequelize
   .sync() // create the database table for our model(s)
