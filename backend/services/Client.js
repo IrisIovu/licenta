@@ -1,13 +1,24 @@
-const Users = require("../models").User;
+const Users = require("../models").Client;
+
+function isUsernameUnique (username) {
+    Users.count({ where: { username: username } })
+      .then(count => {
+        if (count != 0) {
+          return false;
+        }
+        return true;
+      });
+  }
 
 const findClientByUsername = async (username) => {
     let userFound;
     await Users.findOne({
         where: {
-            Username: sername
+            Username: username
         }
     }).then((user) => userFound = user)
     
+    if(userFound !== undefined)
     return userFound;
 }
 
@@ -22,5 +33,6 @@ const findClientById = async (id) => {
 }
 module.exports = {
     findClientByUsername,
-    findClientById
+    findClientById,
+    isUsernameUnique
 }

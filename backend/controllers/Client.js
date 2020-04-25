@@ -11,14 +11,14 @@ const registerClient = async (req, res) => {
     if (req.body.Username === "" || req.body.parola === "") {
         return res.status(500).send({ message: "Client or password empty" });
     }
-    let ClientFound = await findClientByUsername(req.body.firstname);
+    let ClientFound = await findClientByUsername(req.body.Username);
 
     if (ClientFound) {
         return res.status(409).send({ message: "Client already exists" });
     }
 
     const salt = bcrypt.genSaltSync(10);
-    let ePassword = bcrypt.hashSync(req.body.password, salt);
+    let ePassword = bcrypt.hashSync(req.body.parola, salt);
 await Client.create({
             ClientId:uuid1,
             Username:req.body.Username,
@@ -35,7 +35,7 @@ await Client.create({
                 where:
                     { ClientId: uuid1 }
             })
-            .then(res.status(201).send({ message: "The Client with Clientname: '" + req.body.firstname + "' has been created" }))
+            .then(res.status(201).send({ message: "The Client with Clientname: '" + req.body.Usernmae + "' has been created" }))
             .catch(err => res.status(500).send({
                 message: "The Client could not be created"
             }))
@@ -48,15 +48,14 @@ const login = async (req, res) => {
     if (req.body.Username === "" || req.body.parola === "") {
         return res.status(500).send({ message: "Client or password empty" });
     }
-    let ClientFound = await findClientByUsername(req.body.firstname);
-    var NumarTelefon = req.body.NumarTelefon
+    let ClientFound = await findClientByUsername(req.body.Username);
     
     if (!ClientFound) {
         return res.status(404)
             .send({ message: "No email related to an accout was found" });
     }
 
-    const validPass = bcrypt.compareSync(req.body.password, ClientFound.password);
+    const validPass = bcrypt.compareSync(req.body.parola, ClientFound.parola);
     if (!validPass) {
         return res.status(400).send({ message: "Wrong password" });
     }
