@@ -15,8 +15,7 @@ await Cont.create({
             ContId:uuid1,
             IBAN: req.body.IBAN,
             Sold:req.body.Sold,
-            date:datetime,
-            ClientId:req.body.ClientrId,
+            ClientId:req.body.ClientId,
             MonedaId:req.body.MonedaId
 
             })

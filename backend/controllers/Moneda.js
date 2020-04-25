@@ -1,20 +1,21 @@
-const Currency = require("../models").Currency;
+const Moneda = require("../models").Moneda;
 const uuidv1 = require('uuid/v1');
 
 
 var uuid1 = uuidv1()
-const createCurrency= async(req,res) =>{
-    await Currency.create({
-        CurrencyId:uuid1,
-        CurrencyName:req.body.CurrencyName
+const creareMoneda= async(req,res) =>{
+    await Moneda.create({
+        MonedaId:uuid1,
+        MonedaName:req.body.NumeMoneda,
+        ValoareaMoneziiInLei:req.body.ValoareaMoneziiInLei
 
     })
-    .then(res.status(201).send({ message: "The currency"+req.body.CurrencyName+ " has been created" }))
+    .then(res.status(201).send({ message: "The Moneda"+req.body.MonedaName+ " has been created" }))
     .catch(err => res.status(500).send({
-        message: "The currency could not be created"
+        message: "The Moneda could not be created"
     }))
 }
 
 module.exports ={
-    createCurrency
+    creareMoneda
 }
