@@ -69,23 +69,23 @@ const login = async (req, res) => {
 };
 
 const resetPassword = async (req, resp) => {
-    let ClientFound = await findClientByUsername(req.body.firstname);
+    let ClientFound = await findClientByUsername(req.body.Username);
 
     if (!ClientFound) {
         return resp.status(404).send({ message: "No Client found for this Clientname" })
     } else {
          const salt = bcrypt.genSaltSync(10);
-        let ePassword = bcrypt.hashSync(req.body.password, salt);
+        let ePassword = bcrypt.hashSync(req.body.parola, salt);
         await Client.update(
             {
                 
-                password: ePassword
+                parola: ePassword
             },
             {
                 where:
-                    { Clientname: req.body.firstname }
+                    { Clientname: req.body.Username }
             })
-            .then(resp.status(201).send({ message: "The Client with Clientname: '" + req.body.Clientname + "' has been updated" }))
+            .then(resp.status(201).send({ message: "The Client with Clientname: '" + req.body.Username + "' has been updated" }))
             .catch(err => resp.status(500).send({
                 message: "Error"
             }))
