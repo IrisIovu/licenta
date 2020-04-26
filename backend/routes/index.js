@@ -20,8 +20,9 @@ router.post("/creareMoneda",Moneda.creareMoneda)
 
 router.post("/createTransaction",Transaction.createTranzactie);
 router.delete("/destroyTransaction",Transaction.destroyTransaction);
-router.get("/getAllTransactionForOneAccount",Transaction.getAllTransactionForOneAccountByAccoundID)
-
+router.get("/getTranzactii",Transaction.getTranzactii)
+router.get("/getSold",Transaction.getSold)
+router.get("/getTranzactiiDupaCont/:id",Transaction.getTranzactiiDupaCont)
 
 
 module.exports =router

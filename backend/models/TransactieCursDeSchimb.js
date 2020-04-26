@@ -5,7 +5,5 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true},
         'SumaInLei':DataTypes.INTEGER,
         'SumainMonedaDeSchimb':DataTypes.INTEGER,
-        'idCont':DataTypes.UUID,
-        'idContPrimitor':DataTypes.UUID,
     });
 }

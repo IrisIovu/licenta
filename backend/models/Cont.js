@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.NOW
         },
         'Sold':DataTypes.FLOAT,
-        'ClientId':DataTypes.UUID,
-        'MonedaId':DataTypes.UUID
+        
     });
 }

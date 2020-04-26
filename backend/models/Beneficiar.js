@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Beneficiar', {
         'BeneficiarId':{type: DataTypes.UUID,
             primaryKey: true},
-        'idContBeneficiar':DataTypes.UUID,
-        'idCont':DataTypes.UUID
+        'IBAN':DataTypes.STRING,
+        'Username':DataTypes.STRING
     });
 }

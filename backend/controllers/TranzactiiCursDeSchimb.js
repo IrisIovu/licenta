@@ -1,11 +1,11 @@
-const Tranzactie = require("../models").Tranzactie;
+const TrazactieCursDeSchimb = require("../models").TranzactieCursDeSchimbCursDeSchimb;
 const Cont = require("../models").Cont;
 const uuidv1 = require('uuid/v4');
 const {findAccountById} = require("../services/Cont");
 
 var uuid1 = uuidv1()
 
-const createTranzactie = async (req,res) =>{
+const createTranzactieCursDeSchimb = async (req,res) =>{
     console.log(uuid1)
     if(findAccountById (req.body.ContPrimitorId) == null  )
     {
@@ -16,8 +16,8 @@ const createTranzactie = async (req,res) =>{
         console.log("ContId nu e gasit")
     }    
     try{
-    await Tranzactie.create({
-        TranzactieId:uuid1,
+    await TranzactieCursDeSchimb.create({
+        TranzactieCursDeSchimbId:uuid1,
         Suma:req.body.Suma,
         ContId:req.body.ContId,
         ContPrimitorId:req.body.ContPrimitorId
@@ -41,7 +41,7 @@ const destroyTransaction = async (req,res)=>{
     }))
 }
 
-const getSold = async (req,res)=>{
+const getSoldCS = async (req,res)=>{
     try{
         if(findAccountById(req.body.ContId) !== null)
         {
@@ -59,7 +59,7 @@ const getSold = async (req,res)=>{
     const getTranzactii = async (req, res) => {
         let ConturiGasite;
         try {
-            await Tranzactie.findAll().then((toateConturile) => ConturiGasite = toateConturile);
+            await TranzactieCursDeSchimb.findAll().then((toateConturile) => ConturiGasite = toateConturile);
         }
         catch (err) {
             return res.status(409).send({ message: "No elements found in the database" });
@@ -75,7 +75,7 @@ const getSold = async (req,res)=>{
                 where: { ContId: req.params.id }
             }
         ).then((result) => tranzactiiGasite = result);
-        await Tranzactie.findAll(
+        await TranzactieCursDeSchimb.findAll(
             {
                 where: { ContIdContId: tranzactiiGasite.ContId }
             }).then(result => res.send(result));
@@ -87,10 +87,10 @@ const getSold = async (req,res)=>{
     };
 
 module.exports={
-    createTranzactie,
+    createTranzactieCursDeSchimb,
     destroyTransaction,
     getTranzactii,
-    getSold,
+    getSoldCS,
     getTranzactiiDupaCont
     
 }

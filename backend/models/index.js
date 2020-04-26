@@ -14,11 +14,16 @@ const TranzactieCursDeSchimb = sequelize.import('./TransactieCursDeSchimb.js')
 
 //the relationships
 Client.hasMany(Cont,{onDelete:'cascade'},{foreignKey: 'ClientId'})
-Cont.hasMany(Tranzactie,{onDelete:'cascade'},{foreignKey:'ContId'})
-Cont.hasOne(Moneda,{onDelete:'cascade'},{foreignKey:'MonedaId'})
-Cont.hasMany(TranzactieCursDeSchimb,{onDelete:'cascade'},{foreignKey:'ContId'})
-Cont.hasMany(Beneficiar,{onDelete:'cascade'},{foreignKey:'ContId'})
 
+Tranzactie.belongsTo(Cont, {as: 'ContPrimitorId'});
+Tranzactie.belongsTo(Cont, {as: 'ContId'});
+
+Cont.hasOne(Moneda,{onDelete:'cascade'},{foreignKey:'MonedaId'})
+
+TranzactieCursDeSchimb.belongsTo(Cont, {as: 'ContPrimitorId'});
+TranzactieCursDeSchimb.belongsTo(Cont, {as: 'ContId'});
+
+Beneficiar.hasOne(Cont,{onDelete:'cascade'},{foreignKey:'ContId'})
 
 module.exports = {
     sequelize,

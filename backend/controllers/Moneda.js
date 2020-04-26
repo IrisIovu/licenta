@@ -5,6 +5,7 @@ const uuidv1 = require('uuid/v1');
 var uuid1 = uuidv1()
 const creareMoneda= async(req,res) =>{
     await Moneda.create({
+        
         MonedaId:uuid1,
         MonedaName:req.body.NumeMoneda,
         ValoareaMoneziiInLei:req.body.ValoareaMoneziiInLei
