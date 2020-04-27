@@ -24,5 +24,15 @@ router.get("/getTranzactii",Transaction.getTranzactii)
 router.get("/getSold",Transaction.getSold)
 router.get("/getTranzactiiDupaCont/:id",Transaction.getTranzactiiDupaCont)
 
-
+router.get("/getcurrencyJSon",function (){
+    let demo = () => {
+        let rate = fx(1).from("GBP").to("USD")
+        console.log("£1 = $" + rate.toFixed(4))
+      }
+      
+      fetch('https://api.exchangeratesapi.io/latest')
+        .then((resp) => resp.json())
+        .then((data) => fx.rates = data.rates)
+        .then(demo)
+})
 module.exports =router
