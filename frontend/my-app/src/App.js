@@ -1,8 +1,11 @@
 import React from "react";
+import { toast } from 'react-toastify';
+//import NavigationBar from './components/Navbar/NavigationBar'
 import Routes from './Routes';
 import "./App.css";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure()
 
 function App(props) {
   return (

@@ -3,6 +3,7 @@ const uuidv1 = require('uuid/v1');
 var uuid1 = uuidv1()
 const MOMENT= require( 'moment' );
 let datetime = MOMENT().format( 'YYYY-MM-DD  HH:mm:ss.000' );
+const Client = require("../models").Client;
 
 const createCont = async (req, res) => {
     if(!req.body){
@@ -15,7 +16,7 @@ await Cont.create({
             ContId:uuid1,
             IBAN: req.body.IBAN,
             Sold:req.body.Sold,
-            ClientId:req.body.ClientId,
+            ClientClientId:req.body.ClientId,
             MonedaId:req.body.MonedaId
 
             })
@@ -54,6 +55,21 @@ const deleteCont = async (req,resp)=>
             }))
     }
 
+    const getContByUserId = async (req,resp)=>{
+        
+            await Cont.findOne({
+                where:{
+                    ClientClientId : req.params.id}
+            }).then(result=>res.send(result))
+            .catch(err => resp.status(500).send({
+                message: "Error"
+            }))
+       
+        
+       
+    }
+
+
 const GetContForTransaction = async (req,resp)=>
     {
         let ContFound
@@ -70,5 +86,6 @@ module.exports={
     createCont,
     updateSold,
     deleteCont,
-    GetContForTransaction
+    GetContForTransaction,
+    getContByUserId
 }

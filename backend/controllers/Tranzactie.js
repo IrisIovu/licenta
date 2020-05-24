@@ -2,6 +2,7 @@ const Tranzactie = require("../models").Tranzactie;
 const Cont = require("../models").Cont;
 const uuidv1 = require('uuid/v4');
 const {findAccountById} = require("../services/Cont");
+const {findClientById} = require("../services/Client");
 
 var uuid1 = uuidv1()
 
@@ -68,23 +69,20 @@ const getSold = async (req,res)=>{
     };
 
     const getTranzactiiDupaCont = async (req, res) => {
-        let tranzactiiGasite;
-        try{
-        await Cont.findOne(
+        console.log("FII ATENTA LA CE SCRIU CU CAPS TE ROG")
+        console.log(req.params.id)
+        let  user = await findClientById(req.params.id);
+        console.log(user)
+        console.log("afiseaza id din get tranzactiii dupa cont "+user)
+        await Tranzactie.findOne(
             {
-                where: { ContId: req.params.id }
-            }
-        ).then((result) => tranzactiiGasite = result);
-        await Tranzactie.findAll(
-            {
-                where: { ContIdContId: tranzactiiGasite.ContId }
-            }).then(result => res.send(result));
+                where: { ContIdContId:req.params.id}
+            }).then(result => res.send(result))
+            .catch(err => res.status(500).send({
+                message: "Error"
+            })
+            )
         }
-        catch(err)
-        {
-            return res.status(404).send({ message: "No elements found in the database" });
-        }
-    };
 
 module.exports={
     createTranzactie,

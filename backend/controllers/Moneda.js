@@ -12,7 +12,12 @@ function  getJsonData (){
         };
     
         if (!error && res.statusCode == 200) {
-            console.log(body.rates[names[0]])
+            i = 0 
+            while(i<names.length){
+               /// console.log(body.rates[names[i]])
+                //console.log(names[i])
+                i++;
+            }
         };
     });
     }

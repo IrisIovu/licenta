@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import Axios from "axios";
 import "./Login.css";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import Axios from "axios";
+import 'react-bootstrap'
+import { Form,Col, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
-const backUrl = "http://localhost:3001"
+const backUrl = "localhost/3001"
 
-export default class Login extends React.Component{
+export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             password: ' ',
-            firstname: ' '
+            username: ' '
         };
     }
-
-
 
     handleChange = (e) => {
         this.setState({
@@ -23,14 +23,13 @@ export default class Login extends React.Component{
 
         })
     }
-    
 
 
     onSubmit = (e) => {
         e.preventDefault();
         const form = {
             password: this.state.password,
-            firstname: this.state.firstname
+            username: this.state.username
         }
 
         Axios.post(`${backUrl}/login`, JSON.stringify(form),
@@ -53,37 +52,31 @@ export default class Login extends React.Component{
             });
     }
 
- /*validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}*/
-nextPath(path) {
-    this.props.history.push(path);
-}
+    nextPath(path) {
+        this.props.history.push(path);
+    }
 
-  render (){
-      return (
-        <div id='form'>
-  <div className="form-group" >
-    <label >Email address</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-    onChange ={e => this.handleChange(e)}
-        />
-    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div className="form-group">
-    <label >Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
-    onChange ={e => this.handleChange(e)}
+
+    render() {
+        return (
+            <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+    
     />
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-  <div className="form-check">
-    <input type="checkbox" className="form-checkcc-input" id="exampleCheck1"/>
-    <label className="form-check-label" >Check me out</label>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
   </div>
-  <button type="submit" className="btn btn-primary"  onClick={(e) => this.onSubmit(e)}>Submit</button>
-  <button className="btn btn-primary" onClick={() => this.nextPath("/HomePage")}>HomePage</button>
-    </div>
-      );
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+        )
     }
 }
